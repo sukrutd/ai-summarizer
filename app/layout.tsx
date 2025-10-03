@@ -1,25 +1,25 @@
 import type { Metadata } from 'next';
-import { Source_Sans_3 as FontSans } from 'next/font/google';
+import { Roboto_Mono as RobotoMono } from 'next/font/google';
 import './globals.css';
 
-const fontSans = FontSans({
-    variable: '--font-sans',
-    weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
-    subsets: ['latin']
+const robotoMono = RobotoMono({
+    weight: ['200', '300', '400', '500', '600', '700'],
+    subsets: ['latin'],
+    display: 'swap'
 });
 
-export const metadata: Metadata = {
-    title: 'Summarizer: AI-powered PDF Summarization',
-    description:
-        'Save time, boost productivity and extract key insights from PDF documents with just one click. Transform PDF documents into clear, concise summaries instantly with advanced AI technology.'
-};
+const title = 'Summarizer: AI-powered PDF Summarization';
+const description =
+    'Save time, boost productivity and extract key insights from PDF documents with just one click. Transform PDF documents into clear, concise summaries instantly with advanced AI technology.';
+
+export const metadata: Metadata = { title, description };
 
 export default function RootLayout({
     children
 }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en">
-            <body className={`${fontSans.variable} font-sans antialiased`}>
+            <body className={`${robotoMono.className} antialiased`}>
                 {children}
             </body>
         </html>
