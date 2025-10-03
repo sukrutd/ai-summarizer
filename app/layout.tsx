@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { Roboto_Mono as RobotoMono } from 'next/font/google';
 import './globals.css';
 
+import Header from '@/components/common/header';
+import Footer from '@/components/common/footer';
+
 const robotoMono = RobotoMono({
     weight: ['200', '300', '400', '500', '600', '700'],
     subsets: ['latin'],
@@ -20,7 +23,11 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${robotoMono.className} antialiased`}>
-                {children}
+                <div className="relative flex flex-col min-h-screen">
+                    <Header />
+                    <main className="flex-1">{children}</main>
+                    <Footer />
+                </div>
             </body>
         </html>
     );
