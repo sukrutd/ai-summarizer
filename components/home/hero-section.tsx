@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 export const HeroSection: React.FC = () => {
     return (
-        <section className="mx-auto flex flex-col items-center justify-center py-16 lg:py-20 max-w-7xl">
+        <section className="mx-auto flex flex-col items-center justify-center px-8 py-16 lg:py-20 max-w-7xl">
             <Badge
                 variant="outline"
                 className="border-rose-800 bg-white text-rose-800 hover:bg-gradient-to-r hover:from-rose-100 hover:to-rose-300 px-6 py-2 border-2 rounded-full transition-colors duration-200 group"
@@ -17,7 +17,7 @@ export const HeroSection: React.FC = () => {
                 </div>
             </Badge>
 
-            <h1 className="py-2">
+            <h1 className="py-2 text-center">
                 Transform PDF documents into concise summaries instantly!
             </h1>
 
