@@ -1,14 +1,13 @@
 import type { Metadata } from 'next';
-import { Roboto_Mono as RobotoMono } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 import './globals.css';
 
-import Header from '@/components/common/header';
-import Footer from '@/components/common/footer';
+import { Header } from '@/components/common/header';
+import { Footer } from '@/components/common/footer';
 
-const robotoMono = RobotoMono({
-    weight: ['200', '300', '400', '500', '600', '700'],
-    subsets: ['latin'],
-    display: 'swap'
+const montserrat = Montserrat({
+    weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
+    subsets: ['latin']
 });
 
 const title = 'Summarizer: AI-powered PDF Summarization';
@@ -22,7 +21,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en">
-            <body className={`${robotoMono.className} antialiased`}>
+            <body className={`${montserrat.className} antialiased`}>
                 <div className="relative flex flex-col min-h-screen">
                     <Header />
                     <main className="flex-1">{children}</main>

@@ -116,15 +116,15 @@
     }
 
     h1 {
-        @apply text-3xl md:text-4xl xl:text-5xl font-bold;
+        @apply text-2xl font-semibold;
     }
 
     h2 {
-        @apply text-3xl lg:text-2xl font-semibold;
+        @apply text-xl font-medium;
     }
 
     h3 {
-        @apply text-2xl lg:text-xl font-medium;
+        @apply text-lg font-medium;
     }
 
     a {

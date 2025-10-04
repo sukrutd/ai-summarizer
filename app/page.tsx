@@ -1,9 +1,11 @@
-import { Button } from '@/components/ui/button';
+import { HeroSection } from '@/components/home/hero-section';
 
 export default function Home() {
     return (
-        <div>
-            <Button>Shadcn Button</Button>
+        <div className="relative w-full">
+            <div className="flex flex-col">
+                <HeroSection />
+            </div>
         </div>
     );
 }

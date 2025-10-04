@@ -1,7 +1,5 @@
 import React from 'react';
 
-const Footer = () => {
+export const Footer: React.FC = () => {
     return <footer className="bg-gray-100 py-12">Footer</footer>;
 };
-
-export default Footer;
