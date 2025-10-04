@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrainCircuit, FileOutput, FileText, MoveRight } from 'lucide-react';
 
-type Step = {
-    label: string;
-    description: string;
-    icon: React.ReactNode;
-};
+interface Step {
+    readonly label: string;
+    readonly description: string;
+    readonly icon: React.ReactNode;
+}
 
 const steps: Step[] = [
     {

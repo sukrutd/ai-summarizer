@@ -6,9 +6,9 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
 interface NavLinkProps {
-    href: string;
-    children: React.ReactNode;
-    className?: string;
+    readonly href: string;
+    readonly children: React.ReactNode;
+    readonly className?: string;
 }
 
 export const NavLink: React.FC<NavLinkProps> = ({
