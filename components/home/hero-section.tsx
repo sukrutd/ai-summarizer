@@ -4,7 +4,7 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
-export const HeroSection = () => {
+export const HeroSection: React.FC = () => {
     return (
         <section className="mx-auto flex flex-col items-center justify-center py-16 lg:py-20 max-w-7xl">
             <Badge

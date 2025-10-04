@@ -23,7 +23,7 @@ export const NavLink: React.FC<NavLinkProps> = ({
         <Link
             href={href}
             className={cn(
-                'text-sm text-gray-600 font-medium hover:text-rose-800 hover:font-semibold transition-all duration-200',
+                'text-base text-gray-600 font-medium hover:text-rose-800 hover:font-semibold transition-all duration-200',
                 className,
                 isActive && 'text-rose-800 font-semibold'
             )}

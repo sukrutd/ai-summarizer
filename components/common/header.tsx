@@ -10,9 +10,9 @@ export const Header: React.FC = () => {
         <header>
             <nav className="container flex items-center justify-between px-2 lg:px-8 py-4 mx-auto">
                 <div className="flex">
-                    <NavLink href="/" className="flex items-center gap-1">
-                        <FileText className="w-5 h-5 lg:w-8 lg:h-8 text-gray-800 hover:rotate-12 transition duration-200 ease-in-out" />
-                        <span className="font-bold text-gray-800">
+                    <NavLink href="/" className="flex items-center gap-1 group">
+                        <FileText className="size-6 lg:size-8 text-gray-800 group-hover:rotate-45 group-hover:text-rose-800 transition-all duration-100" />
+                        <span className="font-semibold text-gray-800 group-hover:text-rose-800">
                             Summarizer
                         </span>
                     </NavLink>
