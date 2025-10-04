@@ -44,7 +44,7 @@ const StepItem: React.FC<Step> = ({ label, description, icon }) => {
 
 export const HowItWorksSection: React.FC = () => {
     return (
-        <section className="mx-auto px-8 py-16">
+        <section className="mx-auto p-8">
             <div className="px-4 py-4 max-w-7xl">
                 <div className="text-center mb-8">
                     <h2 className="uppercase mb-4 text-rose-800">
@@ -58,7 +58,10 @@ export const HowItWorksSection: React.FC = () => {
 
                 <div className="relative grid grid-cols-1 lg:grid-cols-3 max-w-6xl py-6">
                     {steps.map((step, index) => (
-                        <div key={index} className="relative">
+                        <div
+                            key={index}
+                            className="relative flex items-stretch"
+                        >
                             <StepItem {...step} />
                             {index < steps.length - 1 && (
                                 <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">

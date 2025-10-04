@@ -3,7 +3,7 @@ import { Pizza } from 'lucide-react';
 
 export const DemoSection: React.FC = () => {
     return (
-        <section className="mx-auto px-8 py-16">
+        <section className="mx-auto p-8">
             <div className="px-4 py-4 max-w-7xl">
                 <div className="flex flex-col items-center justify-center space-y-4">
                     <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-gray-100 border border-gray-400/20">
