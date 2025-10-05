@@ -1,11 +1,9 @@
 import React from 'react';
 import { FileText } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import { NavLink } from '@/components/common/nav-link';
 
 export const Header: React.FC = () => {
-    const isLoggedIn = false; // Replace with actual authentication logic
-
     return (
         <header>
             <nav className="container flex items-center justify-between px-2 lg:px-8 py-4 mx-auto">
@@ -19,22 +17,23 @@ export const Header: React.FC = () => {
                 </div>
                 <div className="flex lg:items-center lg:justify-center gap-4 lg:gap-8">
                     <NavLink href="/#pricing">Pricing</NavLink>
-                    {isLoggedIn && (
+                    <SignedIn>
                         <NavLink href="/dashboard">Your Summaries</NavLink>
-                    )}
+                    </SignedIn>
                 </div>
                 <div className="flex lg:justify-end">
-                    {isLoggedIn ? (
+                    <SignedIn>
                         <div className="flex items-center gap-2">
                             <NavLink href="/upload">Upload a PDF</NavLink>
                             <div>Pro</div>
-                            <Button>User</Button>
+                            <UserButton />
                         </div>
-                    ) : (
+                    </SignedIn>
+                    <SignedOut>
                         <div>
                             <NavLink href="/sign-in">Sign In</NavLink>
                         </div>
-                    )}
+                    </SignedOut>
                 </div>
             </nav>
         </header>

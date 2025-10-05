@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
 
 import { Header } from '@/components/common/header';
@@ -20,14 +21,16 @@ export default function RootLayout({
     children
 }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="en">
-            <body className={`${montserrat.className} antialiased`}>
-                <div className="relative flex flex-col min-h-screen">
-                    <Header />
-                    <main className="flex-1">{children}</main>
-                    <Footer />
-                </div>
-            </body>
-        </html>
+        <ClerkProvider>
+            <html lang="en">
+                <body className={`${montserrat.className} antialiased`}>
+                    <div className="relative flex flex-col min-h-screen">
+                        <Header />
+                        <main className="flex-1">{children}</main>
+                        <Footer />
+                    </div>
+                </body>
+            </html>
+        </ClerkProvider>
     );
 }
