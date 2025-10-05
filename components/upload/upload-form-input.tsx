@@ -16,9 +16,9 @@ export const UploadFormInput: React.FC<UploadFormInputProps> = ({
             <div className="flex items-center gap-2">
                 <Input
                     type="file"
+                    accept="aaplication/pdf"
                     id="file"
                     name="file"
-                    accept="aaplication/pdf"
                     required
                 />
                 <Button>Upload your PDF</Button>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { Montserrat } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
+import { Montserrat } from 'next/font/google';
 import './globals.css';
 
 import { Header } from '@/components/common/header';
