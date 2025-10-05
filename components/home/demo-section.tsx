@@ -19,9 +19,7 @@ export const DemoSection: React.FC = () => {
                     </h3>
                 </div>
 
-                <div className="flex items-center justify-center">
-                    {/* Summary Viewer */}
-                </div>
+                <div className="flex items-center justify-center">{/* Summary Viewer */}</div>
             </div>
         </section>
     );

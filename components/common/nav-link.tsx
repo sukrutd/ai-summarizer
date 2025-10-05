@@ -11,11 +11,7 @@ interface NavLinkProps {
     readonly className?: string;
 }
 
-export const NavLink: React.FC<NavLinkProps> = ({
-    href,
-    children,
-    className
-}) => {
+export const NavLink: React.FC<NavLinkProps> = ({ href, children, className }) => {
     const pathname = usePathname();
     const isActive = href !== '/' && pathname === href;
 

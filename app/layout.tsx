@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import { ClerkProvider } from '@clerk/nextjs';
 import { Montserrat } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs';
+import { Toaster } from '@/components/ui/sonner';
 import './globals.css';
 
 import { Header } from '@/components/common/header';
@@ -29,6 +30,7 @@ export default function RootLayout({
                         <main className="flex-1">{children}</main>
                         <Footer />
                     </div>
+                    <Toaster />
                 </body>
             </html>
         </ClerkProvider>

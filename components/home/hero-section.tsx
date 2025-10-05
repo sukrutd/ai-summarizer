@@ -17,13 +17,10 @@ export const HeroSection: React.FC = () => {
                 </div>
             </Badge>
 
-            <h1 className="py-2 text-center">
-                Transform PDF documents into concise summaries instantly!
-            </h1>
+            <h1 className="py-2 text-center">Transform PDF documents into concise summaries instantly!</h1>
 
             <h2 className="py-2 px-4 lg:px-0 lg:max-w-4xl text-center text-gray-800">
-                Extract key insights and get a beautiful summary reel of the
-                document in seconds.
+                Extract key insights and get a beautiful summary reel of the document in seconds.
             </h2>
 
             <div className="py-2">

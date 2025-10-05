@@ -10,20 +10,17 @@ interface Step {
 const steps: Step[] = [
     {
         label: 'Upload your PDF',
-        description:
-            'Simply drag and drop your PDF file or click to upload it from your device.',
+        description: 'Simply drag and drop your PDF file or click to upload it from your device.',
         icon: <FileText size={64} strokeWidth={1.5} />
     },
     {
         label: 'AI Analysis',
-        description:
-            'Our advanced AI analyzes the content of your PDF to extract key insights.',
+        description: 'Our advanced AI analyzes the content of your PDF to extract key insights.',
         icon: <BrainCircuit size={64} strokeWidth={1.5} />
     },
     {
         label: 'Get Summary',
-        description:
-            'Receive a clear and concise summary of your PDF document.',
+        description: 'Receive a clear and concise summary of your PDF document.',
         icon: <FileOutput size={64} strokeWidth={1.5} />
     }
 ];
@@ -47,29 +44,19 @@ export const HowItWorksSection: React.FC = () => {
         <section className="mx-auto p-8">
             <div className="p-4 max-w-7xl">
                 <div className="text-center mb-8">
-                    <h2 className="uppercase mb-4 text-rose-800">
-                        How it works?
-                    </h2>
+                    <h2 className="uppercase mb-4 text-rose-800">How it works?</h2>
                     <h3 className="lg:max-w-4xl mx-auto">
-                        Transform any PDF into an easy-to-digest summary in
-                        three simple steps
+                        Transform any PDF into an easy-to-digest summary in three simple steps
                     </h3>
                 </div>
 
                 <div className="relative grid grid-cols-1 lg:grid-cols-3 max-w-6xl py-6">
                     {steps.map((step, index) => (
-                        <div
-                            key={index}
-                            className="relative flex items-stretch"
-                        >
+                        <div key={index} className="relative flex items-stretch">
                             <StepItem {...step} />
                             {index < steps.length - 1 && (
                                 <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
-                                    <MoveRight
-                                        size={32}
-                                        strokeWidth={1.5}
-                                        className="text-rose-800"
-                                    />
+                                    <MoveRight size={32} strokeWidth={1.5} className="text-rose-800" />
                                 </div>
                             )}
                         </div>

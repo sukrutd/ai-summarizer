@@ -18,12 +18,7 @@ const pricingPlans: PricingPlan[] = [
         name: 'Basic',
         description: 'Perfect for occasional use',
         price: 5,
-        items: [
-            '5 PDF summaries per month',
-            'Standard processing speed',
-            'Email support',
-            'Plain text export'
-        ],
+        items: ['5 PDF summaries per month', 'Standard processing speed', 'Email support', 'Plain text export'],
         paymentLink: 'https://www.buymeacoffee.com'
     },
     {
@@ -31,24 +26,12 @@ const pricingPlans: PricingPlan[] = [
         name: 'Pro',
         description: 'For professionals and teams',
         price: 20,
-        items: [
-            'Unlimited PDF summaries',
-            'Priority processing',
-            '24/7 support',
-            'Markdown export'
-        ],
+        items: ['Unlimited PDF summaries', 'Priority processing', '24/7 support', 'Markdown export'],
         paymentLink: 'https://www.buymeacoffee.com'
     }
 ];
 
-const PricingCard: React.FC<PricingPlan> = ({
-    id,
-    name,
-    description,
-    price,
-    items,
-    paymentLink
-}) => {
+const PricingCard: React.FC<PricingPlan> = ({ id, name, description, price, items, paymentLink }) => {
     return (
         <div
             className={cn(
@@ -63,31 +46,17 @@ const PricingCard: React.FC<PricingPlan> = ({
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <p className="text-3xl tracking-tight font-semibold">
-                        ${price}
-                    </p>
+                    <p className="text-3xl tracking-tight font-semibold">${price}</p>
                     <div className="flex flex-col justify-end">
-                        <div className="text-sm uppercase font-semibold">
-                            USD
-                        </div>
+                        <div className="text-sm uppercase font-semibold">USD</div>
                         <div className="text-sm">/month</div>
                     </div>
                 </div>
 
                 <div className="text-base leading-relaxed space-y-2">
                     {items.map((item, index) => (
-                        <li
-                            key={index}
-                            className="flex items-center gap-1 whitespace-nowrap"
-                        >
-                            <CheckIcon
-                                size={18}
-                                className={
-                                    id === 'pro'
-                                        ? 'text-rose-800'
-                                        : 'text-green-800'
-                                }
-                            />
+                        <li key={index} className="flex items-center gap-1 whitespace-nowrap">
+                            <CheckIcon size={18} className={id === 'pro' ? 'text-rose-800' : 'text-green-800'} />
                             <span>{item}</span>
                         </li>
                     ))}
@@ -113,9 +82,7 @@ export const PricingSection: React.FC = () => {
     return (
         <section className="mx-auto p-8">
             <div className="py-4 max-w-5xl xl:max-w-6xl">
-                <h2 className="text-rose-800 text-center uppercase mb-8">
-                    Pricing
-                </h2>
+                <h2 className="text-rose-800 text-center uppercase mb-8">Pricing</h2>
                 <div className="flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-8">
                     {pricingPlans.map((plan) => (
                         <PricingCard key={plan.id} {...plan} />
