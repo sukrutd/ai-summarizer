@@ -23,7 +23,7 @@ export const Header: React.FC = () => {
                 </div>
                 <div className="flex lg:justify-end">
                     <SignedIn>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-4">
                             <NavLink href="/upload">Upload a PDF</NavLink>
                             <div>Pro</div>
                             <UserButton />
