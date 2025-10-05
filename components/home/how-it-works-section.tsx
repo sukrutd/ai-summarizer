@@ -45,7 +45,7 @@ const StepItem: React.FC<Step> = ({ label, description, icon }) => {
 export const HowItWorksSection: React.FC = () => {
     return (
         <section className="mx-auto p-8">
-            <div className="px-4 py-4 max-w-7xl">
+            <div className="p-4 max-w-7xl">
                 <div className="text-center mb-8">
                     <h2 className="uppercase mb-4 text-rose-800">
                         How it works?

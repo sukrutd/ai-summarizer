@@ -29,7 +29,7 @@ export const HeroSection: React.FC = () => {
             <div className="py-2">
                 <Button
                     variant={'link'}
-                    className="text-white text-base lg:text-lg px-8 lg:px-12 py-6 rounded-full bg-linear-to-r from-slate-900 to-rose-600 hover:from-rose-600 hover:to-slate-900 hover:no-underline transition-colors duration-200"
+                    className="text-white text-base lg:text-lg px-8 py-6 rounded-full bg-linear-to-r from-slate-900 to-rose-600 hover:from-rose-600 hover:to-slate-900 hover:no-underline transition-colors duration-200"
                 >
                     <Link href="/#pricing" className="flex items-center gap-2">
                         <span>Try Summarizer</span>
