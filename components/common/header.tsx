@@ -5,7 +5,7 @@ import { NavLink } from '@/components/common/nav-link';
 
 export const Header: React.FC = () => {
     return (
-        <header>
+        <header className="relative">
             <nav className="container flex items-center justify-between px-2 lg:px-8 py-4 mx-auto">
                 <div className="flex">
                     <NavLink href="/" className="flex items-center gap-1 group">
@@ -16,13 +16,13 @@ export const Header: React.FC = () => {
                 <div className="flex lg:items-center lg:justify-center gap-4 lg:gap-8">
                     <NavLink href="/#pricing">Pricing</NavLink>
                     <SignedIn>
-                        <NavLink href="/dashboard">Your Summaries</NavLink>
+                        <NavLink href="/dashboard">Summaries</NavLink>
                     </SignedIn>
                 </div>
                 <div className="flex lg:justify-end">
                     <SignedIn>
-                        <div className="flex items-center gap-4">
-                            <NavLink href="/upload">Upload a PDF</NavLink>
+                        <div className="flex items-center gap-2 lg:gap-4">
+                            <NavLink href="/upload">Upload PDF</NavLink>
                             <div>Pro</div>
                             <UserButton />
                         </div>

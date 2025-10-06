@@ -18,9 +18,7 @@ const description =
 
 export const metadata: Metadata = { title, description };
 
-export default function RootLayout({
-    children
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <ClerkProvider>
             <html lang="en">
@@ -30,7 +28,7 @@ export default function RootLayout({
                         <main className="flex-1">{children}</main>
                         <Footer />
                     </div>
-                    <Toaster />
+                    <Toaster position="top-right" offset={64} closeButton />
                 </body>
             </html>
         </ClerkProvider>
