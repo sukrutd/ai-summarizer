@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 
 export const UploadHeader: React.FC = () => {
     return (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center text-center">
             <div className="mb-2">
                 <Badge
                     variant="outline"

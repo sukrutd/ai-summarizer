@@ -11,9 +11,9 @@ interface UploadFormInputProps {
 export const UploadFormInput: React.FC<UploadFormInputProps> = ({ onSubmit }) => {
     return (
         <form className="py-4" onSubmit={onSubmit}>
-            <div className="flex items-center gap-2">
-                <Input type="file" accept="aaplication/pdf" id="file" name="file" required />
-                <Button>Upload your PDF</Button>
+            <div className="flex flex-col sm:flex-row items-center gap-2">
+                <Input type="file" accept="application/pdf" id="file" name="file" required />
+                <Button className="w-full sm:w-auto">Upload your PDF</Button>
             </div>
         </form>
     );
