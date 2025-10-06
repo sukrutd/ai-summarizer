@@ -9,15 +9,17 @@ interface NavLinkProps {
     readonly href: string;
     readonly children: React.ReactNode;
     readonly className?: string;
+    readonly onClick?: () => void;
 }
 
-export const NavLink: React.FC<NavLinkProps> = ({ href, children, className }) => {
+export const NavLink: React.FC<NavLinkProps> = ({ href, children, className, onClick }) => {
     const pathname = usePathname();
     const isActive = href !== '/' && pathname === href;
 
     return (
         <Link
             href={href}
+            onClick={onClick}
             className={cn(
                 'text-sm sm:text-base text-gray-600 font-medium hover:text-rose-800 hover:font-semibold transition-all duration-200',
                 className,

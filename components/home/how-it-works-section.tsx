@@ -50,7 +50,7 @@ export const HowItWorksSection: React.FC = () => {
                     </h3>
                 </div>
 
-                <div className="relative grid grid-cols-1 lg:grid-cols-3 max-w-6xl py-6">
+                <div className="relative grid grid-cols-1 lg:grid-cols-3 max-w-6xl py-4">
                     {steps.map((step, index) => (
                         <div key={index} className="relative flex items-stretch">
                             <StepItem {...step} />

@@ -81,7 +81,7 @@ const PricingCard: React.FC<PricingPlan> = ({ id, name, description, price, item
 export const PricingSection: React.FC = () => {
     return (
         <section className="mx-auto p-8">
-            <div className="py-4 max-w-5xl xl:max-w-6xl">
+            <div className="max-w-5xl xl:max-w-6xl">
                 <h2 className="text-rose-800 text-center uppercase mb-8">Pricing</h2>
                 <div className="flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-8">
                     {pricingPlans.map((plan) => (
