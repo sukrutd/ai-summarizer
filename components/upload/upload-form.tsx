@@ -1,17 +1,20 @@
 'use client';
 
 import React from 'react';
-import { z } from 'zod';
-import { toast } from 'sonner';
-import { CircleX, CloudUpload, ScanText } from 'lucide-react';
-import { useUploadThing } from '@/utils/uploadthing';
 import { UploadFormInput } from '@/components/upload/upload-form-input';
+import { useUploadThing } from '@/utils/uploadthing';
+import { createToast } from '@/utils/toast';
+import { z } from 'zod';
+
+// Constants
+const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
+const ALLOWED_FILE_TYPE = 'application/pdf';
 
 const schema = z.object({
     file: z
         .instanceof(File, { message: 'Invalid file' })
-        .refine((file) => file.size <= 20 * 1024 * 1024, 'File size must be less than 20M.')
-        .refine((file) => file.type.startsWith('application/pdf'), 'File must be a PDF.')
+        .refine((file) => file.size <= MAX_FILE_SIZE, 'File size must be less than 20M.')
+        .refine((file) => file.type.startsWith(ALLOWED_FILE_TYPE), 'File must be a PDF.')
 });
 
 export const UploadForm: React.FC = () => {
@@ -23,10 +26,7 @@ export const UploadForm: React.FC = () => {
             console.log('Upload has begun for:', fileName);
         },
         onUploadError: (error) => {
-            toast.error(`Error occurred while uploading`, {
-                description: error.message,
-                icon: <CircleX size={18} className="text-red-800" />
-            });
+            createToast.error('Error occurred while uploading', error.message);
         }
     });
 
@@ -40,33 +40,23 @@ export const UploadForm: React.FC = () => {
 
         if (!result.success) {
             const errorMessage = z.flattenError(result.error)?.fieldErrors?.file?.[0];
-            toast.error('Something went wrong', {
-                description: errorMessage || 'Invalid file',
-                icon: <CircleX size={18} className="text-red-800" />
-            });
+            createToast.error('Something went wrong', errorMessage || 'Invalid file');
             return;
         }
 
-        toast('Uploading PDF', {
-            description: 'We are uploading your file.',
-            icon: <CloudUpload size={18} className="text-blue-800" />
-        });
+        // Notify user that upload is in progress
+        createToast.uploadInProgress();
 
         // Start the file upload
         const response = await startUpload([file]);
 
         if (!response) {
-            toast.error('Something went wrong', {
-                description: 'Please use a different file.',
-                icon: <CircleX size={18} className="text-red-800" />
-            });
+            createToast.error('Something went wrong', 'Please use a different file.');
             return;
         }
 
-        toast('Processing PDF', {
-            description: 'AI is analyzing your document.',
-            icon: <ScanText size={18} className="text-rose-800" />
-        });
+        // Notify user that parsing is in progress
+        createToast.parsingInProgress();
     };
 
     return (
