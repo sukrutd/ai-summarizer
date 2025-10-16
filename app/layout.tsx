@@ -28,7 +28,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                         <main className="flex-1">{children}</main>
                         <Footer />
                     </div>
-                    <Toaster position="top-right" offset={64} closeButton />
+                    <Toaster position="top-right" offset={64} duration={3000} closeButton />
                 </body>
             </html>
         </ClerkProvider>

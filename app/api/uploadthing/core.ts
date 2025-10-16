@@ -21,11 +21,16 @@ export const appFileRouter = {
             return { userId: user.id };
         })
         .onUploadComplete(async ({ metadata, file }) => {
-            console.log('File URL:', file.ufsUrl);
             // ---------------------------------------------
             // Note: This code runs on server after upload
             // ---------------------------------------------
-            return { userId: metadata.userId, fileUrl: file.ufsUrl };
+            return {
+                userId: metadata.userId,
+                file: {
+                    name: file.name,
+                    url: file.ufsUrl
+                }
+            };
         })
 } satisfies FileRouter;
 

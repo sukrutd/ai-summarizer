@@ -1,10 +1,11 @@
 'use client';
 
 import React from 'react';
+import { z } from 'zod';
 import { UploadFormInput } from '@/components/upload/upload-form-input';
+import { generatePdfSummary } from '@/actions/upload-actions';
 import { useUploadThing } from '@/utils/uploadthing';
 import { createToast } from '@/utils/toast';
-import { z } from 'zod';
 
 // Constants
 const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
@@ -39,7 +40,7 @@ export const UploadForm: React.FC = () => {
         const result = schema.safeParse({ file });
 
         if (!result.success) {
-            const errorMessage = z.flattenError(result.error)?.fieldErrors?.file?.[0];
+            const errorMessage = result.error.flatten()?.fieldErrors?.file?.[0];
             createToast.error('Something went wrong', errorMessage || 'Invalid file');
             return;
         }
@@ -51,12 +52,15 @@ export const UploadForm: React.FC = () => {
         const response = await startUpload([file]);
 
         if (!response) {
-            createToast.error('Something went wrong', 'Please use a different file.');
+            createToast.error('File upload failed.', 'Please try again or use a different file.');
             return;
         }
 
         // Notify user that parsing is in progress
         createToast.parsingInProgress();
+
+        // Parse the uploaded PDF and generate a summary using langchain
+        const summary = await generatePdfSummary(response);
     };
 
     return (
