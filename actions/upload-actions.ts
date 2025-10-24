@@ -2,6 +2,7 @@
 
 import { ClientUploadedFileData } from 'uploadthing/types';
 import { fetchAndExtractPdfText } from '@/utils/langchain';
+import { generateSummaryFromGemini } from '@/utils/gemini-ai';
 
 type UploadResponse = ClientUploadedFileData<{ userId: string; file: { name: string; url: string } }>[];
 
@@ -24,9 +25,9 @@ export async function generatePdfSummary(uploadResponse: UploadResponse | undefi
         };
     }
 
+    let pdfText = '';
     try {
-        const pdfText = await fetchAndExtractPdfText(fileUrl);
-        console.log('Extracted PDF Text:', pdfText);
+        pdfText = await fetchAndExtractPdfText(fileUrl);
     } catch {
         return {
             success: false,
@@ -34,4 +35,13 @@ export async function generatePdfSummary(uploadResponse: UploadResponse | undefi
             data: null
         };
     }
+
+    let summary = '';
+    try {
+        summary = await generateSummaryFromGemini(pdfText);
+    } catch {
+        throw new Error('Failed to generate summary! ');
+    }
+
+    return summary;
 }
