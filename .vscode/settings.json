@@ -2,8 +2,5 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "editor.fontSize": 18,
-    "terminal.integrated.fontSize": 18,
-    "[typescript]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features"
-    }
+    "terminal.integrated.fontSize": 18
 }

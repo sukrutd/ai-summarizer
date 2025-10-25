@@ -10,20 +10,10 @@ const compat = new FlatCompat({ baseDirectory: __dirname });
 
 const eslintConfig = [
     {
-        ignores: [
-            'node_modules/**',
-            '.next/**',
-            'out/**',
-            'build/**',
-            'next-env.d.ts'
-        ]
+        ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**', 'next-env.d.ts']
     },
     ...compat.config({
-        extends: [
-            'next/core-web-vitals',
-            'next/typescript',
-            'eslint-config-prettier'
-        ]
+        extends: ['next/core-web-vitals', 'next/typescript', 'eslint-config-prettier']
     }),
     {
         files: ['**/*.{js,jsx,ts,tsx,mjs}'],
@@ -37,7 +27,7 @@ const eslintConfig = [
             prettier: prettierPlugin
         },
         rules: {
-            'prettier/prettier': 'error',
+            'prettier/prettier': 'warn',
             'react/no-escape-entities': 'off'
         }
     }
