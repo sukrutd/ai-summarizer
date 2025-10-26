@@ -6,42 +6,48 @@ import { generateSummaryFromGemini } from '@/utils/gemini-ai';
 
 type UploadResponse = ClientUploadedFileData<{ userId: string; file: { name: string; url: string } }>[];
 
-export async function generatePdfSummary(uploadResponse: UploadResponse | undefined) {
+interface ProcessResult {
+    success: boolean;
+    message: string;
+    data: string | null;
+}
+
+const createSuccessResponse = (
+    data: string | null = null,
+    message: string = 'Summary generated successfully.'
+): ProcessResult => ({
+    success: true,
+    message,
+    data
+});
+
+const createErrorResponse = (message: string = 'File upload failed.'): ProcessResult => ({
+    success: false,
+    message,
+    data: null
+});
+
+export async function generatePdfSummary(uploadResponse: UploadResponse | undefined): Promise<ProcessResult | string> {
+    // Early return if no upload response
     if (!uploadResponse) {
-        return {
-            success: false,
-            message: 'File upload failed',
-            data: null
-        };
+        return createErrorResponse();
     }
 
-    const { serverData: { userId, file: { url: fileUrl, name: fileName } = {} } = {} } = uploadResponse[0];
+    const { serverData: { file: { url: fileUrl } = {} } = {} } = uploadResponse[0];
 
+    // Early return if no file URL
     if (!fileUrl) {
-        return {
-            success: false,
-            message: 'File upload failed',
-            data: null
-        };
+        return createErrorResponse();
     }
 
-    let pdfText = '';
     try {
-        pdfText = await fetchAndExtractPdfText(fileUrl);
-    } catch {
-        return {
-            success: false,
-            message: 'File upload failed',
-            data: null
-        };
-    }
+        // Extract text from PDF
+        const pdfText = await fetchAndExtractPdfText(fileUrl);
 
-    let summary = '';
-    try {
-        summary = await generateSummaryFromGemini(pdfText);
+        // Generate summary using Gemini AI
+        const summary = await generateSummaryFromGemini(pdfText);
+        return createSuccessResponse(summary);
     } catch {
-        throw new Error('Failed to generate summary! ');
+        return createErrorResponse('Failed to generate summary.');
     }
-
-    return summary;
 }

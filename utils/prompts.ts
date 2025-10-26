@@ -26,8 +26,9 @@ Note: Use the above format strictly.
 - Term 3: Brief definition or explanation
 
 # Insightful Quotes or Priciples
-> "Memorable quote 1 from the document" – Author/Source
-> "Memorable quote 2 from the document" – Author/Source
+> - "Insightful or motivational quote from the document" – Author/Source
+
+Note: Ensure that quote is strictly within blockquote formatting and is well attributed. The quote must be from the document.
 
 # Pro Tips
 - [Relevant Emoji] Actionable advice or recommendation 1

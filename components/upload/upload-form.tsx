@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { z } from 'zod';
 import { UploadFormInput } from '@/components/upload/upload-form-input';
 import { generatePdfSummary } from '@/actions/upload-actions';
@@ -19,20 +19,24 @@ const schema = z.object({
 });
 
 export const UploadForm: React.FC = () => {
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
     const { startUpload } = useUploadThing('pdfUploader', {
+        onUploadBegin: () => {
+            createToast.uploadInProgress();
+        },
         onClientUploadComplete: () => {
-            console.log('Uploaded successfully!');
+            createToast.uploadSuccess();
         },
-        onUploadBegin: (fileName) => {
-            console.log('Upload has begun for:', fileName);
-        },
-        onUploadError: (error) => {
-            createToast.error('Error occurred while uploading', error.message);
+        onUploadError: () => {
+            createToast.uploadError();
         }
     });
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setIsLoading(true);
+
         const formData = new FormData(e.currentTarget);
         const file = formData.get('file') as File;
 
@@ -42,17 +46,16 @@ export const UploadForm: React.FC = () => {
         if (!result.success) {
             const errorMessage = result.error.flatten()?.fieldErrors?.file?.[0];
             createToast.error('Something went wrong', errorMessage || 'Invalid file');
+            setIsLoading(false);
             return;
         }
-
-        // Notify user that upload is in progress
-        createToast.uploadInProgress();
 
         // Start the file upload
         const response = await startUpload([file]);
 
         if (!response) {
-            createToast.error('File upload failed.', 'Please try again or use a different file.');
+            createToast.uploadError();
+            setIsLoading(false);
             return;
         }
 
@@ -62,11 +65,17 @@ export const UploadForm: React.FC = () => {
         // Parse the uploaded PDF and generate a summary using langchain
         const summary = await generatePdfSummary(response);
         console.log({ summary });
+        setIsLoading(false);
+
+        // Clear the chosen file from the file input
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
     };
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <UploadFormInput onSubmit={handleSubmit} />
+            <UploadFormInput onSubmit={handleSubmit} isLoading={isLoading} ref={fileInputRef} />
         </div>
     );
 };
