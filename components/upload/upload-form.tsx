@@ -61,6 +61,7 @@ export const UploadForm: React.FC = () => {
 
         // Parse the uploaded PDF and generate a summary using langchain
         const summary = await generatePdfSummary(response);
+        console.log({ summary });
     };
 
     return (
