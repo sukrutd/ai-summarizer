@@ -3,7 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { z } from 'zod';
 import { UploadFormInput } from '@/components/upload/upload-form-input';
-import { generatePdfSummary } from '@/actions/upload-actions';
+import { generatePdfSummary, storePdfSummaryAction } from '@/actions/upload-actions';
 import { useUploadThing } from '@/utils/uploadthing';
 import { createToast } from '@/utils/toast';
 
@@ -59,12 +59,16 @@ export const UploadForm: React.FC = () => {
             return;
         }
 
-        // Notify user that parsing is in progress
-        createToast.parsingInProgress();
-
         // Parse the uploaded PDF and generate a summary using langchain
-        const summary = await generatePdfSummary(response);
-        console.log({ summary });
+        const summarizationResult = await generatePdfSummary(response);
+        const { data: { summary, title, fileUrl, fileName } = {} } = summarizationResult;
+
+        // Save the summary to the database
+        if (summary) {
+            await storePdfSummaryAction({ summary, title, fileName, fileUrl });
+            createToast.summarySaved();
+        }
+
         setIsLoading(false);
 
         // Clear the chosen file from the file input
