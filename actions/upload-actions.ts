@@ -2,6 +2,7 @@
 'use server';
 
 import { auth } from '@clerk/nextjs/server';
+import { revalidatePath } from 'next/cache';
 import { ClientUploadedFileData } from 'uploadthing/types';
 import { fetchAndExtractPdfText } from '@/utils/langchain';
 import { generateSummaryFromGemini } from '@/utils/gemini-ai';
@@ -32,7 +33,7 @@ interface PdfSummary {
     title: string;
 }
 
-export async function generatePdfSummary(uploadResponse?: UploadResponse): Promise<ProcessResult> {
+export async function generatePdfSummaryAction(uploadResponse?: UploadResponse): Promise<ProcessResult> {
     // Early return if no upload response
     if (!uploadResponse) {
         return createErrorResponse('Failed to upload file.');
@@ -96,10 +97,13 @@ export async function storePdfSummaryAction({ fileName, fileUrl, summary, title 
         if (!savedSummary) {
             return createErrorResponse('Failed to save PDF summary.');
         }
-
-        return createSuccessResponse(savedSummary, 'PDF summary saved successfully.');
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Failed to save PDF summary.';
         return createErrorResponse(errorMessage);
     }
+
+    // Revalidate the cache
+    revalidatePath(`/summaries/${savedSummary.id}`);
+
+    return createSuccessResponse(savedSummary, 'PDF summary saved successfully.');
 }

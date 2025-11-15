@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { UploadFormInput } from '@/components/upload/upload-form-input';
-import { generatePdfSummary, storePdfSummaryAction } from '@/actions/upload-actions';
+import { generatePdfSummaryAction, storePdfSummaryAction } from '@/actions/upload-actions';
 import { useUploadThing } from '@/utils/uploadthing';
 import { createToast } from '@/utils/toast';
 
@@ -21,6 +22,8 @@ const schema = z.object({
 export const UploadForm: React.FC = () => {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
+
     const { startUpload } = useUploadThing('pdfUploader', {
         onUploadBegin: () => {
             createToast.uploadInProgress();
@@ -51,17 +54,17 @@ export const UploadForm: React.FC = () => {
         }
 
         // Start the file upload
-        const response = await startUpload([file]);
+        const uploadResponse = await startUpload([file]);
 
-        if (!response) {
+        if (!uploadResponse) {
             createToast.uploadError();
             setIsLoading(false);
             return;
         }
 
         // Parse the uploaded PDF and generate a summary using langchain
-        const summarizationResult = await generatePdfSummary(response);
-        const { data: { summary, title, fileUrl, fileName } = {} } = summarizationResult;
+        const summarizationResult = await generatePdfSummaryAction(uploadResponse);
+        const { data: { id: summaryId, summary, title, fileUrl, fileName } = {} } = summarizationResult;
 
         // Save the summary to the database
         if (summary) {
@@ -69,12 +72,14 @@ export const UploadForm: React.FC = () => {
             createToast.summarySaved();
         }
 
+        // Clear the chosen file from the file input
+        if (fileInputRef.current) fileInputRef.current.value = '';
+
+        // Set loading indicator to false
         setIsLoading(false);
 
-        // Clear the chosen file from the file input
-        if (fileInputRef.current) {
-            fileInputRef.current.value = '';
-        }
+        // Redirect the user to the summary page
+        if (summaryId) router.push(`/summaries/${summaryId}`);
     };
 
     return (
